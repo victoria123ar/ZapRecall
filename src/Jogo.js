@@ -4,6 +4,7 @@ import Perguntas from "./Perguntas";
 import Resultado from "./Resultado";
 import Logo from "./assets/logo.png";
 import GlobalStyle from "./GlobalStyle";
+import quizz from "./Quizz";
 
 export default function App() {
   return (
@@ -12,7 +13,7 @@ export default function App() {
         <img src={Logo} alt="Logo" />
         <h1>ZapRecall</h1>
       </Titulo>
-      <Perguntas />
+      <Perguntas quizz={quizz}/>
       <Resultado />
       <GlobalStyle />
     </>
