@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
+import Home from "./Home";
+import Jogo from "./Jogo";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [jogo, setJogo] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Conteudo>
+      <GlobalStyle />
+      {jogo ? <Jogo /> : <Home Jogar={() => setJogo(true)} />}
+    </Conteudo>
   );
 }
 
-export default App;
+const Conteudo = styled.div`
+  background-color: #fb6b6b;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 200px;
+  font-family: "Recursive";
+  background-color: #fb6b6b;
+`;
