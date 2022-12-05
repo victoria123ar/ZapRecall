@@ -7,18 +7,15 @@ import erro from "./assets/icone_erro.png";
 import quase from "./assets/icone_quase.png";
 import certo from "./assets/icone_certo.png";
 
-let numero = 0
-
-
 export default function Pergunta(props) {
-  const {topico, pergunta, resposta} = { ...props };
-  const [contador, setContador] = useState(0);
+  const {topico, pergunta, resposta, numero} = { ...props };
   const [questao, setQuestao] = useState("perguntaFechada");
   const [texto, setTexto] = useState(topico);
   const [botao, setBotao] = useState(play);
   const [mostrarBotoes, setMostrarBotoes] = useState(false);
   const [cor, setCor] = useState('')
-  const quantidadePerguntas = '8'
+
+  let estado = false;
 
   function abrirPergunta() {
     if (botao === play) {
@@ -34,8 +31,6 @@ export default function Pergunta(props) {
   }
   
   function respostaFinal(r){
-    numero  = numero + 1;
-    setContador(numero)
     
     if (r==='erro'){
         setQuestao("perguntaFechada");
@@ -43,6 +38,7 @@ export default function Pergunta(props) {
         setCor("vermelho");
         setBotao(erro);
         setMostrarBotoes(false);
+        numero()
     }
     if (r==='quase'){
         setQuestao("perguntaFechada");
@@ -50,6 +46,7 @@ export default function Pergunta(props) {
         setCor("laranja");
         setBotao(quase);
         setMostrarBotoes(false);
+        numero()
     }
     if (r==='certo'){
         setQuestao("perguntaFechada");
@@ -57,11 +54,10 @@ export default function Pergunta(props) {
         setCor("verde");
         setBotao(certo);
         setMostrarBotoes(false);
+        numero()
    }
 
   }
-  
-  console.log(contador)
   
     return (
       <>
@@ -82,9 +78,6 @@ export default function Pergunta(props) {
             </Botoes>
             </div>
       </Card>
-          <Rodape>
-          <p>{contador}/{quantidadePerguntas} CONCLUÍDOS</p>
-        </Rodape>
         </>
 )
 }

@@ -2,14 +2,14 @@ import React from 'react';
 import styled from "styled-components"
 
 export default function Resultado(props) {
-const {quizz} = props;
+const {contador} = props;
+const quantidadePerguntas = '8'
 
-console.log(quizz)
-console.log('oi')
+console.log(contador)
 
   return (
     <Rodape>
-      <p>0/4 CONCLUÍDOS</p>
+      <p>{contador}/{quantidadePerguntas} CONCLUÍDOS</p>
     </Rodape>
   );
 }
