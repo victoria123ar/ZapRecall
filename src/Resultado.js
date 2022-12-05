@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from "styled-components"
 
-export default function Resultado() {
+export default function Resultado(props) {
+const {quizz} = props;
+
+console.log(quizz)
+console.log('oi')
+
   return (
     <Rodape>
       <p>0/4 CONCLUÍDOS</p>

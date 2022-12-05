@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Conteudo>
       <GlobalStyle />
-      {jogo ? <Jogo /> : <Home Jogar={() => setJogo(true)} />}
+      {jogo ? <Jogo /> : <Home abrirJogo={() => setJogo(true)} />}
     </Conteudo>
   );
 }

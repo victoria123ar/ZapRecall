@@ -3,13 +3,13 @@ import Logo from "./assets/logo.png";
 import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components"
 
-export default function Jogo({ Jogar }) {
+export default function Jogo({ abrirJogo }) {
   return (
     <>
     <Titulo>
       <img src={Logo} alt="Logo" />
       <h1>ZapRecall</h1>
-      <button onClick={Jogar}>Iniciar Recall!</button>
+      <button onClick={abrirJogo}>Iniciar Recall!</button>
     </Titulo>
         <GlobalStyle />
         </>

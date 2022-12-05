@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Perguntas from "./Perguntas";
-import Resultado from "./Resultado";
 import Logo from "./assets/logo.png";
 import GlobalStyle from "./GlobalStyle";
 import quizz from "./Quizz";
 
 export default function App() {
+
   return (
     <>
       <Titulo>
@@ -14,7 +14,6 @@ export default function App() {
         <h1>ZapRecall</h1>
       </Titulo>
       <Perguntas quizz={quizz}/>
-      <Resultado />
       <GlobalStyle />
     </>
   );

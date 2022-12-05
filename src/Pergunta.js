@@ -1,20 +1,92 @@
-import React from 'react';
-import styled from "styled-components"
-import play from './assets/seta_play.png'
-import virar from './assets/seta_virar.png'
+import React from "react";
+import styled from "styled-components";
+import play from "./assets/seta_play.png";
+import virar from "./assets/seta_virar.png";
+import { useState } from "react";
+import erro from "./assets/icone_erro.png";
+import quase from "./assets/icone_quase.png";
+import certo from "./assets/icone_certo.png";
+
+let numero = 0
+
 
 export default function Pergunta(props) {
-    const {topico, pergunta, resposta} = {...props};
-  return (
-    <Card>
-      <div className="perguntaFechada">
-        <p>Pergunta {topico}</p>
-        <img src={play} alt="Play" />
-      </div>
-      <Botoes>
-      </Botoes>
-    </Card>
-  );
+  const {topico, pergunta, resposta} = { ...props };
+  const [contador, setContador] = useState(0);
+  const [questao, setQuestao] = useState("perguntaFechada");
+  const [texto, setTexto] = useState(topico);
+  const [botao, setBotao] = useState(play);
+  const [mostrarBotoes, setMostrarBotoes] = useState(false);
+  const [cor, setCor] = useState('')
+  const quantidadePerguntas = '8'
+
+  function abrirPergunta() {
+    if (botao === play) {
+      setQuestao("perguntaAberta");
+      setTexto(pergunta);
+      setBotao(virar);
+    }
+    if (botao === virar) {
+      setTexto(resposta);
+      setBotao("");
+      setMostrarBotoes(true);
+    }
+  }
+  
+  function respostaFinal(r){
+    numero  = numero + 1;
+    setContador(numero)
+    
+    if (r==='erro'){
+        setQuestao("perguntaFechada");
+        setTexto(topico);
+        setCor("vermelho");
+        setBotao(erro);
+        setMostrarBotoes(false);
+    }
+    if (r==='quase'){
+        setQuestao("perguntaFechada");
+        setTexto(topico);
+        setCor("laranja");
+        setBotao(quase);
+        setMostrarBotoes(false);
+    }
+    if (r==='certo'){
+        setQuestao("perguntaFechada");
+        setTexto(topico);
+        setCor("verde");
+        setBotao(certo);
+        setMostrarBotoes(false);
+   }
+
+  }
+  
+  console.log(contador)
+  
+    return (
+      <>
+      <Card data-test='flashcard'>
+        <div className={questao}>
+          <Resposta>
+            <p data-test='flashcard-text' className={cor}>{texto}</p>
+          </Resposta>
+          <img data-test='play-btn' onClick={() => abrirPergunta()} src={botao} alt={botao} />
+            <Botoes>
+              {mostrarBotoes ? <BotaoVermelho data-test='no-btn' onClick={() => respostaFinal('erro')}>Não lembrei</BotaoVermelho> : true}
+              {mostrarBotoes ? (
+                <BotaoLaranja data-test='partial-btn' onClick={() => respostaFinal('quase') }>Quase não lembrei</BotaoLaranja>
+              ) : (
+                true
+              )}
+              {mostrarBotoes ? <BotaoVerde data-test='zap-btn' onClick={() => respostaFinal('certo')}>Zap!</BotaoVerde> : true}
+            </Botoes>
+            </div>
+      </Card>
+          <Rodape>
+          <p>{contador}/{quantidadePerguntas} CONCLUÍDOS</p>
+        </Rodape>
+        </>
+)
 }
 
 const Card = styled.div`
@@ -84,7 +156,7 @@ const Botoes = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-`
+`;
 
 const BotaoVermelho = styled.button`
   width: 85px;
@@ -162,3 +234,22 @@ const Resposta = styled.p`
     color: #2fbe34;
   }
 `;
+
+const Rodape = styled.div`
+    height: 70px;
+    width: 100vw;
+
+    background-color: #fff;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+p{
+    font-size: 18px;
+}
+`
